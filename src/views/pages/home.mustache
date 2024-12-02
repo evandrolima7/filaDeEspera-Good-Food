@@ -1,0 +1,41 @@
+{{>partials/header}}
+
+<section class="formularioHome">
+<fieldset>
+    <h1>Cadastro na Fila de Espera</h1>
+
+    <form method="POST" action="/fila-de-espera">
+        <label>
+            Nome:
+            <input type="text" name="name" placeholder="Digite o nome completo" required>
+        </label>
+        <label>
+            Telefone:
+            <input type="tel" name="phone" placeholder="(XX) XXXXX-XXXX" required>
+        </label>
+        <label>
+            E-mail:
+            <input type="email" name="email" placeholder="Digite o e-mail">
+        </label>
+        <label>
+            Quantidade de pessoas:
+            <input type="number" name="peopleCount" placeholder="Ex: 2" required>
+        </label>
+        <label>
+            Data de chegada:
+            <input type="text" name="arrivalDate" required value="{{dataAtual}}">
+        </label>
+        <label>
+            Hora de chegada:
+            <input  type="text" name="arrivalTime" required value="{{horarioAtual}}">
+        </label>
+        <label>
+            Observações:
+            <textarea name="observations" placeholder="Adicione observações ou preferências especiais (ex.: mesa externa, acessibilidade, etc.)"></textarea>
+        </label>
+        <input type="submit" value="Cadastrar na Fila">
+    </form>
+</fieldset>
+</section>
+
+{{>partials/footer}}

@@ -79,23 +79,6 @@ Isso iniciará o servidor utilizando o nodemon, que irá monitorar alterações 
 ## Scripts
 start-dev: Inicia o servidor de desenvolvimento com o nodemon, que monitora alterações nos arquivos.
 test: Exibe um erro fictício de "teste não especificado" (não há testes implementados no momento).
-Estrutura do Projeto
-O projeto segue a seguinte estrutura de diretórios:
-
-bash
-Copiar código
-fila-de-espera/
-│
-├── src/
-│   ├── server.ts          # Arquivo principal do servidor
-│   ├── models/            # Modelos do banco de dados Sequelize
-│   ├── routes/            # Rotas da aplicação
-│   └── controllers/       # Lógica de controle das rotas
-│
-├── .env                   # Arquivo de variáveis de ambiente
-├── package.json           # Dependências e scripts do projeto
-├── tsconfig.json          # Configurações do TypeScript
-└── README.md              # Este arquivo
 
 ## Como Contribuir
 

@@ -1,0 +1,259 @@
+{{>partials/header}}
+<nav id="menu" class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Ordernar por</a>
+    <a class="navbar-brand-mobile" href="#">Fila De Espera</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <li class="nav-item">
+        <a class="nav-link" href="/fila-de-espera">Chegada</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/fila-de-espera/recentes">Recentes</a>
+    </li>
+    <li class="nav-item">
+          <a class="nav-link" href="/fila-de-espera/aguardando">Aguardando</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/fila-de-espera/chamados">Chamados</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/fila-de-espera/desistentes" >Desistentes</a>
+        </li>
+</ul>
+      <form class="d-flex" role="search" method="POST" action="/fila-de-espera/pesquisar">
+    <input class="form-control me-2" type="search" name="search" placeholder="Buscar por nome" aria-label="Search">
+    <button class="btnBuscar" type="submit">Buscar</button>
+</form>
+
+    </div>
+  </div>
+</nav>
+
+<nav id="menu-mobile" class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Ordernar por</a>
+    <a class="navbar-brand-mobile" href="#">Fila De Espera</a>
+    <!-- Remover o botão do menu colapsável (navbar-toggler) -->
+    <div class="navbar-collapse"> <!-- Remover a classe 'collapse' -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+              <a class="nav-link" href="/fila-de-espera">Chegada</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="/fila-de-espera/recentes">Recentes</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="/fila-de-espera/aguardando">Aguardando</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="/fila-de-espera/chamados">Chamados</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="/fila-de-espera/desistentes">Desistentes</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search" method="POST" action="/fila-de-espera/pesquisar">
+          <input class="form-control me-2" type="search" name="search" placeholder="Buscar por nome" aria-label="Search">
+          <button class="btnBuscar" type="submit">Buscar</button>
+        </form>
+    </div>
+  </div>
+</nav>
+
+
+{{#successMessage}}
+<h1 class="mensagem"> "Usuario {{name}} {{action}} com sucesso!" <button class="destroy">X</button></h1>
+{{/successMessage}}
+
+
+<div class="clientes-container">
+ {{#clients}}
+    <div class="card-cliente">
+        <header>{{name}} - #0{{id}} <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Backdrop{{id}}">
+              Editar
+            </button> </header>
+
+
+        <div class="info">
+            <p><strong>Quantidade de Pessoas:</strong> {{quantity}}</p>
+            <p><strong>Telefone:</strong>{{tel}}</p>
+            <p><strong>Email:</strong> {{email}}</p>
+            <p><strong>Data de Chegada:</strong> {{date}}</p>
+            <p><strong>Hora de Chegada:</strong>{{time}} </p>
+            <p><strong>Observações: </strong>{{observations}} </p>
+        </div>
+        <div class="status">
+            <p><strong>Status:</strong> <span class="status-text aguardando">{{status}} </span></p>
+        </div>
+        <div class="actions">
+            <button class="btn btn-chamar"><a href="/fila-de-espera/{{id}}/chamando-cliente">Chamar</a></button>
+            <button class="btn btn-desistiu"><a href="/fila-de-espera/{{id}}/cliente-desistiu">Desistiu</a></button>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{id}}">
+              Deletar
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop{{id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel{{id}}" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel{{id}}">Deletar Cliente</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <h5>Tem certeza que deseja excluir cliente da fila?</h5>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Voltar</button>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+              <a href="/fila-de-espera/{{id}}/deletar" class="text-white">Deletar</a>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="Backdrop{{id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="BackdropLabel{{id}}" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="BackdropLabel{{id}}">Editar dados de {{name}}</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <section class="formulario">
+<form method="POST" action="/fila-de-espera/{{id}}/{{name}}/editar">
+    <label>
+        Nome:
+        <input class="nameLabel" type="text" name="name" value="{{name}}" placeholder="Digite o nome completo" required>
+    </label>
+
+    <label>
+            Telefone:
+            <input type="tel" name="phone" value="{{tel}}" placeholder="(XX) XXXXX-XXXX" required>
+        </label>
+        <label>
+            E-mail:
+            <input type="email" name="email" value="{{email}}" placeholder="Digite o e-mail">
+        </label>
+        <label>
+            Quantidade de pessoas:
+            <input type="number" name="peopleCount" value="{{quantity}}" placeholder="Ex: 2" required>
+        </label>
+        <label>
+            Observações:
+            <textarea name="observations" value="{{observations}}" placeholder=" Adicione observações ou preferências especiais (ex.: mesa externa, acessibilidade, etc.)"></textarea>
+        </label>
+
+    <input type="submit" value="Salvar Alterações">
+</form>
+</section>
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/clients}}
+</div>
+
+
+
+{{#chegada}}
+<div aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+      <a class="page-item2" href="/fila-de-espera{{previousPage}}">Anterior</a>
+    <li class="page-item"><a class="{{#numberPage1}} page-active {{/numberPage1}}" href="/fila-de-espera">1</a></li>
+    <li class="page-item"><a class="{{#numberPage2}} page-active {{/numberPage2}}" href="/fila-de-espera2">2</a></li>
+    <li class="page-item"><a class="{{#numberPage3}} page-active {{/numberPage3}}" href="/fila-de-espera3">3</a></li>
+    <a class="page-item2" href="/fila-de-espera{{nextPage}}">Proximo</a>
+    </li>
+  </ul>
+</div>
+{{/chegada}}
+
+
+{{#recente}}
+<div aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+      <a class="page-item2" href="/fila-de-espera/recentes{{previousPage}}">Anterior</a>
+    </li>
+    <li class="page-item"><a class="{{#numberPage1}} page-active {{/numberPage1}}" href="/fila-de-espera/recentes">1</a></li>
+    <li class="page-item"><a class="{{#numberPage2}} page-active {{/numberPage2}}" href="/fila-de-espera/recentes2">2</a></li>
+    <li class="page-item"><a class="{{#numberPage3}} page-active {{/numberPage3}}" href="/fila-de-espera/recentes3">3</a></li>
+    <a class="page-item2" href="/fila-de-espera/recentes{{nextPage}}">Proximo</a>
+    </li>
+  </ul>
+</div>
+{{/recente}}
+
+{{#chamado}}
+<div aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+      <a class="page-item2" href="/fila-de-espera/chamados{{previousPage}}">Anterior</a>
+    </li>
+    <li class="page-item"><a class="{{#numberPage1}} page-active {{/numberPage1}}" href="/fila-de-espera/chamados">1</a></li>
+    <li class="page-item"><a class="{{#numberPage2}} page-active {{/numberPage2}}" href="/fila-de-espera/chamados2">2</a></li>
+    <li class="page-item"><a class="{{#numberPage3}} page-active {{/numberPage3}}" href="/fila-de-espera/chamados3">3</a></li>
+    <a class="page-item2" href="/fila-de-espera/chamados{{nextPage}}">Proximo</a>
+    </li>
+  </ul>
+</div>
+{{/chamado}}
+
+{{#aguardando}}
+<div aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+      <a class="page-item2" href="/fila-de-espera/aguardando{{previousPage}}">Anterior</a>
+    </li>
+    <li class="page-item"><a class="{{#numberPage1}} page-active {{/numberPage1}}" href="/fila-de-espera/aguardando">1</a></li>
+    <li class="page-item"><a class="{{#numberPage2}} page-active {{/numberPage2}}" href="/fila-de-espera/aguardando2">2</a></li>
+    <li class="page-item"><a class="{{#numberPage3}} page-active {{/numberPage3}}" href="/fila-de-espera/aguardando3">3</a></li>
+    <a class="page-item2" href="/fila-de-espera/aguardando{{nextPage}}">Proximo</a>
+    </li>
+  </ul>
+</div>
+{{/aguardando}}
+
+{{#desistente}}
+<div aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+      <a class="page-item2" href="/fila-de-espera/desistentes{{previousPage}}">Anterior</a>
+    </li>
+    <li class="page-item"><a class="{{#numberPage1}} page-active {{/numberPage1}}" href="/fila-de-espera/desistentes">1</a></li>
+    <li class="page-item"><a class="{{#numberPage2}} page-active {{/numberPage2}}" href="/fila-de-espera/desistentes2">2</a></li>
+    <li class="page-item"><a class="{{#numberPage3}} page-active {{/numberPage3}}" href="/fila-de-espera/desistentes3">3</a></li>
+    <a class="page-item2" href="/fila-de-espera/desistentes{{nextPage}}">Proximo</a>
+    </li>
+  </ul>
+</div>
+{{/desistente}}
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+         <button class="btn btn-deletar"><a href="/fila-de-espera/{{id}}/deletar">Deletar</a></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{>partials/footer}}
