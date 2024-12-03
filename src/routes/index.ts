@@ -19,8 +19,7 @@ router.post("/fila-de-espera", filaClientes);
 //Rotas de Botoes
 router.post("/fila-de-espera/:id/:name/editar", btn.editar);
 router.get("/fila-de-espera/:id/deletar", btn.deletar)
-router.get("/fila-de-espera/:id/chamando-cliente", btn.chamarCliente)
-router.post("/fila-de-espera/:id/chamando-cliente", btn.chamarCliente)
+router.get("/fila-de-espera/:id/:email/chamando-cliente", btn.chamarCliente)
 router.get("/fila-de-espera/:id/cliente-desistiu", btn.clienteDesistiu)
  
 //Rotas de ordernação

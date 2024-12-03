@@ -40,30 +40,35 @@ export const deletar = async (req: Request, res: Response) => {
 
 export const chamarCliente = async (req: Request, res: Response) => {
     const id: string = req.params.id;
-    const email: string = req.body.email;
+    let email: string = req.params.email;
 
     const results = await Clients.findAll({ where: { id } });
-    console.log(results);
-    
+
     if (results.length > 0) {
         const client = results[0];
         client.status = "chamado"; 
         await client.save();
-        
+
+        // Envio do e-mail
         const transporter = nodemailer.createTransport({
-            service: 'gmail', 
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false,
             auth: {
-                user: process.env.EMAIL_USER, 
-                pass: process.env.EMAIL_PASS, 
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS,
+            },
+            tls: {
+                rejectUnauthorized: false,
             },
         });
 
-        
         const mailOptions = {
-            from: process.env.EMAIL_USER, 
-            to: email,                   
-            subject: 'Status Atualizado', 
-            text: `Olá ${client.name}, seu status foi alterado para 'chamado'.`, 
+            from: process.env.EMAIL_USER,
+            to: email,
+            subject: 'Status Atualizado',
+            html: `Olá ${client.name}, seu status foi alterado para <strong>'chamado'</strong>.`,
+            text: `Olá ${client.name}, seu status foi alterado para 'chamado'.`,
         };
 
         transporter.sendMail(mailOptions, (error, info) => {
@@ -73,9 +78,21 @@ export const chamarCliente = async (req: Request, res: Response) => {
                 console.log('E-mail enviado: ' + info.response);
             }
         });
+
+        // Definindo o flash message
+        req.flash('successMessageChamado', `Status do cliente ${client.name} foi atualizado para "chamado".`);
     }
-    return res.redirect("/fila-de-espera");
+
+    let clients = await Clients.findAll({
+        limit: 9
+    });
+
+    return res.render("pages/filaClientes", {
+        successMessageChamado: req.flash('successMessageChamado'), 
+        clients
+    });
 };
+
 
 export const clienteDesistiu = async (req: Request, res: Response) => {
     const id: string = req.params.id;

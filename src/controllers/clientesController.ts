@@ -49,8 +49,6 @@ export const filaClientes = async (req: Request, res: Response) => {
             limit: 9
         });
 
-        let successMessage = true;
-
         res.render("pages/filaClientes", {
             titulo: "Novo Cliente",
             rota: "/",
@@ -60,7 +58,6 @@ export const filaClientes = async (req: Request, res: Response) => {
             aguardando:false,
             chamado:false,
             desistente:false,
-            successMessage,
             action: "salvo"
         });
     } catch (error) {

@@ -64,33 +64,32 @@
   </div>
 </nav>
 
-
-{{#successMessage}}
-<h1 class="mensagem"> "Usuario {{name}} {{action}} com sucesso!" <button class="destroy">X</button></h1>
-{{/successMessage}}
+{{#successMessageChamado}}
+  <div class="alert alert-success">{{successMessageChamado}}</div>
+{{/successMessageChamado}}
 
 
 <div class="clientes-container">
  {{#clients}}
     <div class="card-cliente">
-        <header>{{name}} - #0{{id}} <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Backdrop{{id}}">
-              Editar
+        <header>{{name}} - #0{{id}} <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#Backdrop{{id}}">
+              EDITAR
             </button> </header>
 
 
         <div class="info">
-            <p><strong>Quantidade de Pessoas:</strong> {{quantity}}</p>
+            <p><strong>Quantidade:</strong> {{quantity}}</p>
             <p><strong>Telefone:</strong>{{tel}}</p>
-            <p><strong>Email:</strong> {{email}}</p>
-            <p><strong>Data de Chegada:</strong> {{date}}</p>
-            <p><strong>Hora de Chegada:</strong>{{time}} </p>
+            <p id="email"><strong>Email:</strong> {{email}}</p>
+            <p><strong>Chegada:</strong> {{date}}</p>
+            <p><strong>Horário:</strong>{{time}} </p>
             <p><strong>Observações: </strong>{{observations}} </p>
         </div>
         <div class="status">
             <p><strong>Status:</strong> <span class="status-text aguardando">{{status}} </span></p>
         </div>
         <div class="actions">
-            <button class="btn btn-chamar"><a href="/fila-de-espera/{{id}}/chamando-cliente">Chamar</a></button>
+            <button class="btn btn-chamar"><a href="/fila-de-espera/{{id}}/{{email}}/chamando-cliente">Chamar</a></button>
             <button class="btn btn-desistiu"><a href="/fila-de-espera/{{id}}/cliente-desistiu">Desistiu</a></button>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{id}}">
