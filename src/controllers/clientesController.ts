@@ -49,6 +49,8 @@ export const filaClientes = async (req: Request, res: Response) => {
             limit: 9
         });
 
+        req.flash('successMessageChamado', `Cliente ${name} foi adicionado a fila de espera.`);
+
         res.render("pages/filaClientes", {
             titulo: "Novo Cliente",
             rota: "/",
@@ -58,7 +60,8 @@ export const filaClientes = async (req: Request, res: Response) => {
             aguardando:false,
             chamado:false,
             desistente:false,
-            action: "salvo"
+            action: "salvo",
+            successMessageChamado: req.flash('successMessageChamado'),
         });
     } catch (error) {
         console.error("Erro ao salvar cliente:", error);
