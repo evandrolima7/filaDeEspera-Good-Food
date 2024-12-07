@@ -6,16 +6,22 @@ import routerMain from "./routes/index";
 import flash from 'connect-flash';
 import session from 'express-session';
 
+dotenv.config();
+
 const server = express();
+const sessionSecret = process.env.SESSION_SECRET || process.env.SECRET_KEY;
+
+if (!sessionSecret) {
+  throw new Error("SESSION_SECRET or SECRET_KEY environment variable must be defined");
+}
 
 server.use(session({
-    secret: process.env.SECRET_KEY as string,
-    resave: false,
-    saveUninitialized: true
+  secret: sessionSecret,
+  resave: false,
+  saveUninitialized: true
 }));
-server.use(flash());
 
-dotenv.config();
+server.use(flash());
 
 server.set("view engine", "mustache");
 server.set("views", path.join(__dirname, "views"));

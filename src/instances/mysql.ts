@@ -9,7 +9,7 @@ export const sequelize: Sequelize = process.env.DATABASE_URL
       dialectOptions: {
         ssl: {
           require: true,
-          rejectUnauthorized: false, // Isso evita problemas de SSL no Heroku
+          rejectUnauthorized: false, 
         },
       },
     })
