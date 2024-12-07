@@ -7,12 +7,17 @@ export const filaClientesGet = async (req: Request, res: Response) =>{
         limit: 9
     });
 
+    let chegada:boolean = true;
+    
+    if(clients.length < 9){
+         chegada = false;
+    }
 
     res.render("pages/filaClientes", {
         titulo: "Novo Cliente",
         rota: "/",
         clients,
-        chegada:true,
+        chegada,
         numberPage1: true,
         nextPage:2,
         recente:false,
