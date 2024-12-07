@@ -10,7 +10,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-dev": "nodemon -e ts,json,mustache src/server.ts",
     "start": "node dist/server.js",
-    "postinstall": "tsc && copyfiles -u 1 src/**/*.mustache dist/"
+    "postinstall": "npm run tsc && copyfiles -u 1 src/**/*.mustache dist/",
+    "tsc": "tsc"
   },
   "author": "",
   "license": "ISC",
@@ -34,6 +35,8 @@
     "@types/node": "^22.9.1",
     "@types/nodemailer": "^6.4.17",
     "@types/sequelize": "^4.28.20",
-    "copyfiles": "^2.4.1"
+    "copyfiles": "^2.4.1",
+    "install": "^0.13.0",
+    "typescript": "^5.7.2"
   }
 }
