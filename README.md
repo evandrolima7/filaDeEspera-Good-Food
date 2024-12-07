@@ -13,6 +13,7 @@ npm install
 Isso irá instalar todas as dependências definidas no arquivo package.json.
 
 ### 2. Variáveis de Ambiente
+
 Crie um arquivo .env no diretório raiz e defina as seguintes variáveis:
 
 bash
