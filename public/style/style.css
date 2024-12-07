@@ -373,8 +373,9 @@ form input {
 
 @media (max-width: 768px) {
     fieldset {
-        width: 90%;
         padding: 20px;
+        width: 100%;
+        box-shadow: none;
     }
 
     legend {
@@ -382,13 +383,25 @@ form input {
     }
 
     form input, form textarea {
-        font-size: 0.9em;
+        font-size: 1em;
+        margin: 0 auto
     }
+
 
     form input[type="submit"] {
         font-size: 0.95em;
         padding: 12px;
     }
+    .formularioHome{
+        width: 100%;
+    }
+    label {
+        margin-top: 30px;
+    }
+    form {
+        padding: 40px;
+    }
+
 }
 
 footer{
@@ -477,5 +490,13 @@ footer{
     }
     .email {
         display: none;
+    }
+}
+@media (max-width:400px){
+    .page-item2 {
+        font-size: .5rem;
+    }
+    .page-item {
+        font-size: .5rem;
     }
 }
