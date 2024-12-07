@@ -40,11 +40,9 @@ export const deletar = async (req: Request, res: Response) => {
 };
 
 export const chamarCliente = async (req: Request, res: Response) => {                     
-    let id: string = req.params.id;
-
-    let {  email, tel } = req.params; // Acessando os parâmetros corretamente
+    let { id, email, tel } = req.params;
     tel = `+55${tel}`;
-
+    console.log(tel)
 
     const results = await Clients.findAll({ where: { id } });
     console.log(results);
@@ -66,8 +64,9 @@ export const chamarCliente = async (req: Request, res: Response) => {
         const mailOptions = {
             from: process.env.EMAIL_USER, 
             to: email,                   
-            subject: 'Status Atualizado', 
-            text: `Olá ${client.name}, seu status foi alterado para 'chamado'.`, 
+            subject: 'Mesa Disponível',
+            html: `Olá ${client.name}, <br> Sua mesa está pronta! Por favor, dirija-se ao local.`,
+            text: `Olá ${client.name}, Sua mesa está pronta! Por favor, dirija-se ao local.`,
         };
 
         transporter.sendMail(mailOptions, (error, info) => {
@@ -76,9 +75,47 @@ export const chamarCliente = async (req: Request, res: Response) => {
             } else {
                 console.log('E-mail enviado: ' + info.response);
             }
+            req.flash('successMessageChamado', `SMS enviado para o cliente com o número ${tel}.`);
         });
     }
-    return res.redirect("/fila-de-espera");
+    const clientTwilio = twilio(
+        process.env.TWILIO_ACCOUNT_SID as string,
+        process.env.TWILIO_AUTH_TOKEN as string
+    );
+
+    const sendSMS = async (to: string, message: string) => {
+        try {
+            const result = await clientTwilio.messages.create({
+                body: message,
+                from: process.env.TWILIO_PHONE_NUMBER,
+                to: to,
+            });
+            console.log('SMS enviado com sucesso:', result.sid);
+            return result;
+        } catch (error) {
+            console.error('Erro ao enviar SMS:', error);
+            throw error;
+        }
+    };
+    try {
+        await sendSMS(tel, 'Sua mesa está pronta! Por favor, dirija-se ao local.');
+        req.flash('successMessageChamado', `SMS enviado para o cliente com o número ${tel}.`);
+    } catch (error) {
+        req.flash('errorMessage', `Erro ao tentar enviar SMS para o número ${tel}.`);
+    }
+
+    let clients = await Clients.findAll({
+        limit: 9
+    });
+
+    return res.render("pages/filaClientes", {
+        successMessageChamado: req.flash('successMessageChamado'), 
+        errorMessage: req.flash('errorMessage'),
+        clients,
+        titulo: "Novo Cliente",
+        rota: "/",
+        chegada: true,
+    });
 };
 
 export const clienteDesistiu = async (req: Request, res: Response) => {

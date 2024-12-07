@@ -41,16 +41,3 @@ function linkActive(){
 }
 
 linkActive();
-
-function apagarMensagem(){
-const btnDestroy = document.querySelector(".destroy");
-const mensagem = document.querySelector(".mensagem");
-
-function destruirH1(){
-    mensagem.remove();
-}
-
-btnDestroy.addEventListener("click", destruirH1)
-}
-
-apagarMensagem()

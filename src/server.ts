@@ -9,11 +9,11 @@ import session from 'express-session';
 const server = express();
 
 server.use(session({
-    secret: 'meu-segredo-muito-seguro-123', // Defina uma chave secreta segura
+    secret: process.env.SECRET_KEY as string,
     resave: false,
     saveUninitialized: true
 }));
-server.use(flash()); // Necessário para usar req.flash
+server.use(flash());
 
 dotenv.config();
 

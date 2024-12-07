@@ -1,0 +1,143 @@
+
+@media (max-width: 992px){
+    #menu{
+        display: none;
+    }
+    #menu-mobile{
+        display: block;
+    }
+    .container-fluid{
+        text-align: center;
+    }
+    form input {
+        margin: 5px;
+    }
+    .btnBuscar{
+        margin: 5px;
+    }
+}
+
+@media (max-width: 768px) {
+    fieldset {
+        padding: 20px;
+        width: 100%;
+        box-shadow: none;
+    }
+
+    legend {
+        font-size: 1.5em;
+    }
+
+    form input, form textarea {
+        font-size: 1em;
+        margin: 0 auto
+    }
+
+
+    form input[type="submit"] {
+        font-size: 0.95em;
+        padding: 12px;
+    }
+    .formularioHome{
+        width: 100%;
+    }
+    label {
+        margin-top: 30px;
+    }
+    form {
+        padding: 40px;
+    }
+
+}
+
+
+@media(max-width: 699px){
+    .card-cliente{
+        width: 250px;
+    }
+}
+
+@media (max-width:540px){
+    #img-logo{
+        width: 100px;
+        height: 70px;
+        margin-left: 10px;
+    }
+    #color-menu-mobile{
+        margin-right: 10px;
+    }
+    .card-cliente{
+        width: 40%;
+    }
+    .info{
+        text-align: center;
+    }
+    .status-text{
+        text-align: center;
+    }
+
+}
+
+@media (max-width:540px){
+    .page-item2 {
+        font-size: 1rem;
+    }
+    .page-item {
+        font-size: 1rem;
+    }
+    .card-cliente .btn {
+        padding: 4px 9px;
+        font-size: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        
+    }
+    .card-cliente .info p {
+        margin: 1px 0;
+        font-size: 12px;
+        color: #555;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        text-align: left;
+    }
+    .card-cliente .status-text {
+        padding: 2px 4px;
+        border-radius: 4px;
+        font-size: 12px;
+    }
+    .actions{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    #email {
+        display: none;
+    }
+}
+.alert {
+    text-align: center;
+}
+
+@media (max-width:400px){
+    .card-cliente .info {
+        margin: 1px 0;
+        font-size: 10px;
+    }
+    .card-cliente {
+        font-size: 10px;
+    }
+    .email {
+        display: none;
+    }
+}
+@media (max-width:400px){
+    .page-item2 {
+        font-size: .5rem;
+    }
+    .page-item {
+        font-size: .5rem;
+    }
+}

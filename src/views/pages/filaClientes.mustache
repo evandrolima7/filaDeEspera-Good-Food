@@ -91,14 +91,11 @@
         <div class="actions">
             <button class="btn btn-chamar"><a href="/fila-de-espera/{{id}}/{{email}}/{{tel}}/chamando-cliente">Chamar</a></button>
             <button class="btn btn-desistiu"><a href="/fila-de-espera/{{id}}/cliente-desistiu">Desistiu</a></button>
-            <!-- Button trigger modal -->
             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{id}}">
               Deletar
             </button>
         </div>
     </div>
-
-    <!-- Modal -->
     <div class="modal fade" id="staticBackdrop{{id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel{{id}}" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -118,8 +115,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Modal -->
     <div class="modal fade" id="Backdrop{{id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="BackdropLabel{{id}}" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -236,7 +231,6 @@
 </div>
 {{/desistente}}
 
-<!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
