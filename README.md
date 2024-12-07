@@ -37,7 +37,7 @@ Essas variáveis são usadas para configurar os serviços de e-mail e SMS.
 ##### npm run start-dev
 ##### Isso usa nodemon para monitorar alterações no arquivo src/server.ts.
 
-## Estrutura do Projeto
+## 📂 Estrutura do Projeto
 
 ### O projeto segue uma estrutura padrão para uma aplicação baseada em Express.
 
@@ -48,7 +48,7 @@ Essas variáveis são usadas para configurar os serviços de e-mail e SMS.
 #### model/: Contém os modelos Sequelize para interação com o banco de dados.
 #### public/: Arquivos estáticos como CSS e imagens.
 
-## Funcionalidades Principais
+## 🚀 Funcionalidades Principais
 
 ### 1. Rotas de Home
 
@@ -90,7 +90,7 @@ Essas variáveis são usadas para configurar os serviços de e-mail e SMS.
 #### Quando um cliente é chamado, é enviado um e-mail usando o Nodemailer e um SMS usando o Twilio.
 #### As mensagens de e-mail e SMS notificam os clientes de que suas mesas estão prontas.
 
-## Tecnologias Utilizadas
+## 🧰 Tecnologias Utilizadas
 
 ### Express.js: Framework web usado para criar o servidor e gerenciar as rotas.
 ### Sequelize: ORM (Object Relational Mapper) usado para interagir com o banco de dados MySQL.
@@ -100,7 +100,7 @@ Essas variáveis são usadas para configurar os serviços de e-mail e SMS.
 ### Connect-Flash: Para exibição de mensagens temporárias (ex.: sucesso ou erro).
 ### Express-Session: Usado para o gerenciamento de sessões entre as requisições.
 
-## Explicação do Código
+## 📝 Explicação do Código
 
 # Configuração do Servidor (src/server.ts)
 
@@ -145,12 +145,12 @@ Essas variáveis são usadas para configurar os serviços de e-mail e SMS.
 #### Usa os controladores para processar as requisições e gerar as respostas.
 
 
-## Contribua
+## 🤝 Contribua
 ### Se você deseja contribuir com este projeto, faça um fork do repositório, faça suas alterações e envie um pull request.
 
-## Licença
+## 📄 Licença
 ### Este projeto está licenciado sob a Licença ISC.
 
-## Notas
+## ⚠️ Notas
 ### Certifique-se de ter credenciais válidas para os serviços de e-mail e Twilio para que as notificações funcionem corretamente.
 ### O banco de dados MySQL deve ter uma tabela Clients que corresponde ao modelo Sequelize utilizado nos controladores.
