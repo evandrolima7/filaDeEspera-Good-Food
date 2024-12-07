@@ -65,7 +65,6 @@ export const deletar = async (req: Request, res: Response) => {
 export const chamarCliente = async (req: Request, res: Response) => {
     let { id, email, tel } = req.params; // Acessando os parâmetros corretamente
     tel = `+55${tel}`;
-    console.log(tel)
 
     const results = await Clients.findAll({ where: { id } });
 
