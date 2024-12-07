@@ -41,9 +41,8 @@ export const deletar = async (req: Request, res: Response) => {
 
 export const chamarCliente = async (req: Request, res: Response) => {                     
     let id: string = req.params.id;
-    let email: string = req.body.email;
 
-    let { id, email, tel } = req.params; // Acessando os parâmetros corretamente
+    let {  email, tel } = req.params; // Acessando os parâmetros corretamente
     tel = `+55${tel}`;
 
 
