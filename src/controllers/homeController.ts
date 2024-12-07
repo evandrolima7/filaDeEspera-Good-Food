@@ -22,7 +22,9 @@ export const timeAtual = (req:Request, res: Response) => {
 
     const time = new Date();
 
-    const horasCompletas = String(time.getHours()).padStart(2, '0');
+    time.setHours(time.getHours() - 3);
+
+    const horasCompletas = String(time.getHours() -3).padStart(2, '0');
     const minutos = String(time.getMinutes()).padStart(2, '0');
 
     const horarioAtual = `${horasCompletas}:${minutos}` 
