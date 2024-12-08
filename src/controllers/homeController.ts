@@ -18,16 +18,15 @@ export const home = async (req: Request, res: Response) => {
     })
 }
 
-export const timeAtual = (req:Request, res: Response) => {
-
+export const timeAtual = (req: Request, res: Response) => {
     const time = new Date();
+    const options: object = { 
+        timeZone: 'America/Sao_Paulo', 
+        hour: '2-digit', 
+        minute: '2-digit' 
+    };
 
-    time.setHours(time.getHours());
+    const horarioAtual = time.toLocaleString('pt-BR', options);
 
-    const horasCompletas = String(time.getHours()).padStart(2, '0');
-    const minutos = String(time.getMinutes()).padStart(2, '0');
-
-    const horarioAtual = `${horasCompletas}:${minutos}` 
-
-    res.json({horarioAtual});
-}
+    res.json({ horarioAtual });
+};
