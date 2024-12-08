@@ -6,10 +6,7 @@ export const chegada = async (req: Request, res: Response) => {
 
     let clients = await Clients.findAll({limit: 9})
 
-    let chegada:boolean = true;
-
     if(clients.length < 9){
-        chegada = false;
     }
 
     res.render("pages/filaClientes", {
