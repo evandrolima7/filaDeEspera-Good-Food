@@ -1,11 +1,17 @@
 import { Request, Response } from "express";
-
-
+import { format } from 'date-fns'; 
+import { toZonedTime } from 'date-fns-tz';
 
 export const home = async (req: Request, res: Response) => {
     const data = new Date();
     
-    const dataAtual = data.toLocaleDateString("pt-BR");
+
+    const timeZone: string = "America/Sao_Paulo"; 
+
+    const localDate: Date = toZonedTime(data, timeZone); 
+
+
+    const dataAtual: string = format(localDate, 'dd/MM/yyyy'); 
 
     res.render("pages/home", {
         dataAtual,

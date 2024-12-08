@@ -1,17 +1,26 @@
-async function atualizarTime(){
+async function atualizarTime() {
     try {
         const response = await fetch("/horario-atual");
-        const data = await response.json();
-        const campoTime = document.querySelector('input[name="arrivalTime"]');
-        if (campoTime) {
-            campoTime.value = data.horarioAtual
-            }
-        } catch(error) {
-            console.error("Erro ao buscar horario atual:", error)
+
+        if (!response.ok) {
+            throw new Error("Falha ao obter o horário atual");
         }
+
+        const data = await response.json();
+
+        const campoTime = document.querySelector('input[name="arrivalTime"]');
+
+        if (campoTime && data.horarioAtual) {
+            campoTime.value = data.horarioAtual;
+        }
+    } catch (error) {
+        console.error("Erro ao buscar horário atual:", error);
     }
+}
+
 
 atualizarTime();
+
 
 setInterval(atualizarTime, 60000);
 
